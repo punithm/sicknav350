@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<package>
+  <name>sicknav350</name>
+  <version>2.5.3</version>
+  <description>sicknav350 is a ROS wrapper for the outstanding library for interfacing with the SICK NAV350 laser scanner</description>
+
+  <maintainer email="punithmallesha@gmail.com">Punith Mallesha</maintainer>
+
+  <license>BSD</license>
+
+  <url type="website">http://ros.org/wiki/sicktoolbox_wrapper</url>
+ 
+  <author>Punith Mallesha</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>message_generation</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rosconsole</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>sicktoolbox</build_depend>
+  <build_depend>move_base_msgs</build_depend>
+  <build_depend>actionlib</build_depend>
+  <build_depend>diagnostic_updater</build_depend>
+  <build_depend>tf</build_depend>
+
+  <run_depend>message_runtime</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rosconsole</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>move_base</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>sicktoolbox</run_depend>
+  <run_depend>move_base_msgs</run_depend>
+  <run_depend>actionlib</run_depend>
+  <run_depend>diagnostic_updater</run_depend>
+  <run_depend>tf</run_depend>
+
+  <export>
+  </export>
+</package>
