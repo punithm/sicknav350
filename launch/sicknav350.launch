@@ -1,0 +1,7 @@
+<launch>
+   <node pkg="sicknav350" type="sicknav350_node" name="sicknav350" output="screen" >
+    <param name="publish_tf" value="true" />
+    <param name="publish_odom_" value="true" />
+    <param name="publish_scan" value="true" />
+  </node>
+</launch>
