@@ -2,13 +2,13 @@
 <package>
   <name>sicknav350</name>
   <version>2.5.3</version>
-  <description>sicknav350 is a ROS wrapper for the outstanding library for interfacing with the SICK NAV350 laser scanner</description>
+  <description>sicknav350 is a ROS driver for interfacing with the SICK NAV350 laser scanner</description>
 
-  <maintainer email="punithmallesha@gmail.com">Punith Mallesha</maintainer>
+  <maintainer email="punith.mallesha@sick.de">Punith Mallesha</maintainer>
 
   <license>BSD</license>
 
-  <url type="website">http://ros.org/wiki/sicktoolbox_wrapper</url>
+  <url type="website">https://github.com/punithm/sicknav350</url>
  
   <author>Punith Mallesha</author>
 
