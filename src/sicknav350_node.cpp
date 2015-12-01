@@ -54,6 +54,34 @@ void publish_scan(ros::Publisher *pub, double *range_values,
 
 }
 
+void PublishLaserTransform(tf::TransformBroadcaster laser_broadcaster,std::string header_frame_id,std::string child_frame_id)
+{
+
+	    laser_broadcaster.sendTransform(
+			    tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0, 0, 0.2374)),
+			          ros::Time::now(),header_frame_id, child_frame_id)); // distance from the focal point of the scanner to its base (199.4mm) + offset from the mount (38mm)
+
+}
+
+void PublishLaserOdometry(double x,double y,double th,ros::Publisher *pub,std::string frame_id)
+{
+	ros::Time current_time;
+	current_time=ros::Time::now();
+	geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(th);
+	nav_msgs::Odometry odom;
+	    odom.header.stamp = current_time;
+	    odom.header.frame_id = frame_id;
+
+	    //set the position
+	    odom.pose.pose.position.x = x;
+	    odom.pose.pose.position.y = y;
+	    odom.pose.pose.position.z = 0;
+	    odom.pose.pose.orientation = odom_quat;
+
+		pub->publish(odom);
+
+}
+
 void PublishPositionTransform(double x,double y,double th,tf::TransformBroadcaster odom_broadcaster,std::string header_frame_id,std::string child_frame_id)
 {
 
@@ -74,40 +102,12 @@ void PublishPositionTransform(double x,double y,double th,tf::TransformBroadcast
     odom_broadcaster.sendTransform(odom_trans);
 }
 
-void PublishLaserTransform(tf::TransformBroadcaster laser_broadcaster,std::string header_frame_id,std::string child_frame_id)
-{
-
-	    laser_broadcaster.sendTransform(
-			    tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0, 0, 0.2374)),
-			          ros::Time::now(),header_frame_id, child_frame_id)); // distance from the focal point of the scanner to its base (199.4mm) + offset from the mount (38mm)
-
-}
-
 double vx,vy,vth;
 void OdometryCallback(const nav_msgs::Odometry::ConstPtr& msg)
 {
 	vx=msg->twist.twist.linear.x;
 	vy=msg->twist.twist.linear.y;
 	vth=msg->twist.twist.angular.z;
-}
-
-void PublishLaserOdometry(double x,double y,double th,ros::Publisher *pub,std::string frame_id)
-{
-	ros::Time current_time;
-	current_time=ros::Time::now();
-	geometry_msgs::Quaternion odom_quat = tf::createQuaternionMsgFromYaw(th);
-	nav_msgs::Odometry odom;
-	    odom.header.stamp = current_time;
-	    odom.header.frame_id = frame_id;
-
-	    //set the position
-	    odom.pose.pose.position.x = x;
-	    odom.pose.pose.position.y = y;
-	    odom.pose.pose.position.z = 0;
-	    odom.pose.pose.orientation = odom_quat;
-
-		pub->publish(odom);
-
 }
 
 int main(int argc, char *argv[]) {
