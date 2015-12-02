@@ -59,6 +59,7 @@ void publish_scan(ros::Publisher *pub, double *range_values,
 
 }
 
+
 void PublishLaserTransform(tf::TransformBroadcaster laser_broadcaster,std::string header_frame_id,std::string child_frame_id)
 {
 
@@ -66,8 +67,10 @@ void PublishLaserTransform(tf::TransformBroadcaster laser_broadcaster,std::strin
 			    tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0, 0, 0.2374)),
 			          ros::Time::now(),header_frame_id, child_frame_id)); // distance from the focal point of the scanner to its base (199.4mm) + offset from the mount (38mm)
 
-}
+} //you can also define a urdf model of the scanner instead
 
+
+//necessary for sensor fusion using robot_localization package
 void PublishLaserOdometry(double x,double y,double th,ros::Publisher *pub,std::string frame_id)
 {
 	ros::Time current_time;
@@ -87,6 +90,7 @@ void PublishLaserOdometry(double x,double y,double th,ros::Publisher *pub,std::s
 
 }
 
+// position as tf 
 void PublishPositionTransform(double x,double y,double th,tf::TransformBroadcaster odom_broadcaster,std::string header_frame_id,std::string child_frame_id)
 {
 
@@ -107,6 +111,7 @@ void PublishPositionTransform(double x,double y,double th,tf::TransformBroadcast
     odom_broadcaster.sendTransform(odom_trans);
 }
 
+// odometry call back from the robot 
 double vx,vy,vth;
 void OdometryCallback(const nav_msgs::Odometry::ConstPtr& msg)
 {
@@ -147,7 +152,7 @@ int main(int argc, char *argv[]) {
 	nh_ns.param<std::string>("fixed_frame_id", fixed_frame_id, "front_mount"); // nav350 mount position frame on the robot 
 
 	nh_ns.param<std::string>("laser_frame_id", laser_frame_id, "map"); //global cooridnate frame measurement for navigation and position based on reflectors
-	nh_ns.param<std::string>("laser_child_frame_id", laser_child_frame_id, "reflector");// fixed frame eg: odom or base or reflector
+	nh_ns.param<std::string>("laser_child_frame_id", laser_child_frame_id, "reflector");// a fixed frame eg: odom or base or reflector
 
 	ros::Subscriber sub = nh.subscribe("odometry/filtered", 10, OdometryCallback); // data from sensor fusion or wheel odometry of jackal robot
 
