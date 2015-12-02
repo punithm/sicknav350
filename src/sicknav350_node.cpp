@@ -3,6 +3,10 @@
  *
  *  Created on: Aug 5, 2015
  *      Author: Punith Mallesha
+ * Based on the sicklms.cpp from the sicktoolbox_wrapper ROS package
+ * and the sample code from the sicktoolbox manual.
+ * 
+ * Released under BSD license.
  */
 
 #include <iostream>
