@@ -67,7 +67,7 @@ void PublishLaserTransform(tf::TransformBroadcaster laser_broadcaster,std::strin
 			    tf::StampedTransform(tf::Transform(tf::Quaternion(0, 0, 0, 1), tf::Vector3(0, 0, 0.2374)),
 			          ros::Time::now(),header_frame_id, child_frame_id)); // distance from the focal point of the scanner to its base (199.4mm) + offset from the mount (38mm)
 
-} //you can also define a urdf model of the scanner instead
+} //you can also define a customized urdf model using the nav350 meshes given
 
 
 //necessary for sensor fusion using robot_localization package
